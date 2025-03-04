@@ -25,7 +25,7 @@ if os.getenv('FORCE_ONLY_CUDA', '0') == '1':
 if os.getenv('FORCE_ONLY_CPU', '0') == '1':
     suffices = ['cpu']
 if os.getenv('FORCE_ROCM', '0') == '1':
-    suffices = ['rocm', 'cpu']
+    suffices = ['cpu', 'rocm']
 
 BUILD_DOCS = os.getenv('BUILD_DOCS', '0') == '1'
 WITH_SYMBOLS = os.getenv('WITH_SYMBOLS', '0') == '1'
