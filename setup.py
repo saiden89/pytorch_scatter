@@ -24,6 +24,8 @@ if os.getenv('FORCE_ONLY_CUDA', '0') == '1':
     suffices = ['cuda']
 if os.getenv('FORCE_ONLY_CPU', '0') == '1':
     suffices = ['cpu']
+if os.getenv('FORCE_ROCM', '0') == '1':
+    suffices = ['rocm', 'cpu']
 
 BUILD_DOCS = os.getenv('BUILD_DOCS', '0') == '1'
 WITH_SYMBOLS = os.getenv('WITH_SYMBOLS', '0') == '1'
@@ -72,7 +74,7 @@ def get_extensions():
             nvcc_flags = os.getenv('NVCC_FLAGS', '')
             nvcc_flags = [] if nvcc_flags == '' else nvcc_flags.split(' ')
             nvcc_flags += ['-O3']
-            if torch.version.hip:
+            if suffix == 'rocm':
                 # USE_ROCM was added to later versions of PyTorch.
                 # Define here to support older PyTorch versions as well:
                 define_macros += [('USE_ROCM', None)]
